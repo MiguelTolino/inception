@@ -1,0 +1,16 @@
+version: 2
+
+services:
+  wordpress:
+
+
+  nginx:
+
+
+  mariadb:
+
+
+
+volumes:
+  - wordpress_volume:
+  - sql_volume:
