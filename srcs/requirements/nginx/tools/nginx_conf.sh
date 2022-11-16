@@ -10,14 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
+DOMAIN=mmateo.42.es
+
 apk update && apk upgrade && apk add --no-cache openrc nginx
 adduser -D -g 'www' www
 mkdir /www
 chown -R www:www /var/lib/nginx
 chown -R www:www /www
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-mv /root/conf/nginx.conf /etc/nginx
-mv /root/tools/index.html /www/index.html
-#openrc && touch /run/openrc/softlevel
-#rc-service nginx start
-#rc-update add nginx default
+mv conf/nginx.conf /etc/nginx
+cp tools/index.html /www/index.html
+openrc && touch /run/openrc/softlevel
+rc-service nginx start
+rc-update add nginx default
