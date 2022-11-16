@@ -14,10 +14,10 @@
 
 # Linux development dependencies
 sudo apt-get update
-sudo apt-get -y install dkms build-essential linux-headers-$VERSION
+sudo apt-get -y install dkms build-essential linux-headers-$VERSION vim make
 
 # Docker installation
-sudo apt install -y vim make \
+sudo apt install -y \
     ca-certificates \
     curl \
     gnupg \
