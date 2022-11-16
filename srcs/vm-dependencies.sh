@@ -14,7 +14,7 @@
 
 # Linux development dependencies
 sudo apt-get update
-sudo apt-get -y install dkms build-essential linux-headers-$VERSION vim make
+sudo apt-get -y install dkms build-essential linux-headers-$VERSION vim make git
 
 # Docker installation
 sudo apt install -y \
