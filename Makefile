@@ -10,18 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-SERVER_NAME:= my_nginx:1.0
-DB_NAME:= my_mariadb
-WP_NAME:= my_wordpress
-
-NGINX:= docker build -f srcs/requirements/nginx -t $(SERVER_NAME) .
-MARIADB:= docker build -f srcs/requirements/mariadb -t $(DB_NAME) .
-WORDPRESS:= docker build -f srcs/requirements/wordpress -t $(WP_NAME) .
+FILE:= srcs/docker-compose.yml
 
 all:
-	docker build -f srcs/requirements/nginx/Dockerfile -t $(SERVER_NAME) .
-	docker build -f srcs/requirements/mariadb/Dockerfile -t $(DB_NAME) .
-	docker build -f srcs/requirements/wordpress/Dockerfile -t $(WP_NAME) .
+	docker-compose -f $(FILE) -d
 
 clean:
 	@echo "Cleaning Images"
