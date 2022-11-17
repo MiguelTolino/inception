@@ -1,16 +1,18 @@
-version: 2
+version: "2"
 
 services:
   wordpress:
-
+    build: requirements/wordpress
 
   nginx:
-
+    build: requirements/nginx
+    ports:
+      - "9000:9000"
 
   mariadb:
+    build: requirements/mariadb
 
 
-
-volumes:
-  - wordpress_volume:
-  - sql_volume:
+#volumes:
+#  - wordpress_volume:
+#  - sql_volume:

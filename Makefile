@@ -11,17 +11,22 @@
 # **************************************************************************** #
 
 FILE:= srcs/docker-compose.yml
+IMAGES:= $(shell docker images -aq)
 
-all:
-	docker-compose -f $(FILE) -d
+all: up
+
+up:
+	$(shell docker compose -f $(FILE) -p "inception" up -d)
+
+down:
+	$(shell docker compose -f $(FILE) -p "inception" down)
 
 clean:
 	@echo "Cleaning Images"
-	sh -c docker rmi -f $(NAMES)
+	$(shell /bin/bash -c docker rmi -f $(IMAGES))
 
 fclean: clean
 	@echo "Cleaning and $(NAME)"
-	$(RM) $(NAME)
 
 re: fclean all
 
