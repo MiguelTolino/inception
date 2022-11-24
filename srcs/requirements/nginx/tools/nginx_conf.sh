@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 13:04:47 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/11/24 18:53:17 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/11/24 21:44:39 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,3 +24,4 @@ openrc
 touch /run/openrc/softlevel
 rc-service nginx start
 rc-update add nginx default
+echo "127.0.0.1 $DOMAIN" >> /etc/hosts
