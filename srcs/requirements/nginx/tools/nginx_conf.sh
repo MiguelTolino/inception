@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 13:04:47 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/11/24 21:44:39 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/12/01 17:37:58 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ chown -R www:www /var/lib/nginx
 chown -R www:www /www
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 cp -f conf/nginx.conf /etc/nginx/nginx.conf
-cp -f conf/www/index.html /www/index.html
+mkdir /www/$DOMAIN
+cp -r conf/www/* /www/$DOMAIN
 openrc
 touch /run/openrc/softlevel
 rc-service nginx start
 rc-update add nginx default
-echo "127.0.0.1 $DOMAIN" >> /etc/hosts
