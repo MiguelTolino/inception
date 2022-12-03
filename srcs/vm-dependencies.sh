@@ -14,10 +14,10 @@
 
 # Linux development dependencies
 sudo apt-get update
-sudo apt-get -y install dkms build-essential linux-headers-$VERSION
+sudo apt-get -y install dkms build-essential linux-headers-$VERSION vim make git
 
 # Docker installation
-sudo apt install -y vim make \
+sudo apt install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -28,4 +28,9 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo docker run hello-world
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+docker run hello-world
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
