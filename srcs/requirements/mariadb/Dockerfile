@@ -4,4 +4,4 @@ WORKDIR /root
 COPY . .
 RUN /bin/sh -c /root/conf/mariadb_conf.sh
 EXPOSE 3306
-CMD /bin/sh
+ENTRYPOINT mysqld -u root
