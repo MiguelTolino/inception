@@ -10,26 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
-SERVER_NAME:= my_nginx:1.0
-DB_NAME:= my_mariadb
-WP_NAME:= my_wordpress
+FILE:= srcs/docker-compose.yml
+IMAGES:= $(shell docker images -aq)
 
-NGINX:= docker build -f srcs/requirements/nginx -t $(SERVER_NAME) .
-MARIADB:= docker build -f srcs/requirements/mariadb -t $(DB_NAME) .
-WORDPRESS:= docker build -f srcs/requirements/wordpress -t $(WP_NAME) .
+all: up
 
-all:
-	docker build -f srcs/requirements/nginx/Dockerfile -t $(SERVER_NAME) .
-	docker build -f srcs/requirements/mariadb/Dockerfile -t $(DB_NAME) .
-	docker build -f srcs/requirements/wordpress/Dockerfile -t $(WP_NAME) .
+up:
+	$(shell docker compose -f $(FILE) -p "inception" up -d)
+
+down:
+	$(shell docker compose -f $(FILE) -p "inception" down)
 
 clean:
 	@echo "Cleaning Images"
-	sh -c docker rmi -f $(NAMES)
+	$(shell /bin/bash -c docker rmi -f $(IMAGES))
 
 fclean: clean
 	@echo "Cleaning and $(NAME)"
-	$(RM) $(NAME)
 
 re: fclean all
 
