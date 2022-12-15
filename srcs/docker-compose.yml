@@ -1,27 +1,32 @@
-version: "2"
+version: '3.1'
 
 services:
+
   wordpress:
-    build: requirements/wordpress
-  volume:
-    - wp: /wordpress
-
-  nginx:
-    build: requirements/nginx
+    image: wordpress
+    restart: always
     ports:
-      - 443:443
-
-  mariadb:
-    build: requirements/mariadb
+      - 8080:80
     environment:
-      MYSQL_HOST:
-      MYSQL_USER:
-      MYSQL_PASSWORD:
-      MYSQL_DB: wordpress
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db:/var/lib/mysql
 
-
 volumes:
-  - wp:
-  - db:
+  wordpress:
+  db:
+
