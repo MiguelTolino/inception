@@ -3,16 +3,25 @@ version: "2"
 services:
   wordpress:
     build: requirements/wordpress
+  volume:
+    - wp: /wordpress
 
   nginx:
     build: requirements/nginx
     ports:
-      - "9000:9000"
+      - 443:443
 
   mariadb:
     build: requirements/mariadb
+    environment:
+      MYSQL_HOST:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+      MYSQL_DB: wordpress
+    volumes:
+      - db:/var/lib/mysql
 
 
-#volumes:
-#  - wordpress_volume:
-#  - sql_volume:
+volumes:
+  - wp:
+  - db:
