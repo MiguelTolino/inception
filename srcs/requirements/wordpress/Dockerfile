@@ -16,8 +16,8 @@ RUN	openrc && \
 RUN	wget http://wordpress.org/latest.tar.gz && \
 	tar -xzvf latest.tar.gz && \
 	rm latest.tar.gz && \
+	echo "<?php phpinfo(); ?>" >> /www/index.php && \
 	adduser -D -g 'www' www && \
-	chown -R www:www /www && \
-	echo "<?php phpinfo(); ?>" >> /www/info.php
+	chown -R www:www /www
 
 CMD /bin/sh
