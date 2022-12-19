@@ -9,7 +9,7 @@ RUN apk update && \
 	unzip \
 	openrc
 
-RUN 	openrc && \	
+RUN	openrc && \	
 	touch /run/openrc/softlevel && \
 	rc-update add php-fpm7 default
 
@@ -17,6 +17,7 @@ RUN	wget http://wordpress.org/latest.tar.gz && \
 	tar -xzvf latest.tar.gz && \
 	rm latest.tar.gz && \
 	adduser -D -g 'www' www && \
-	chown -R www:www /www
+	chown -R www:www /www && \
+	echo "<?php phpinfo(); ?>" >> /www/info.php
 
 CMD /bin/sh
