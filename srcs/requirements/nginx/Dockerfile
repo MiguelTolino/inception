@@ -7,6 +7,7 @@ RUN /bin/sh -c tools/nginx_conf.sh
 ## Expose Ports
 EXPOSE 9000
 EXPOSE 443
+EXPOSE 80
 
 # Start nginx
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
