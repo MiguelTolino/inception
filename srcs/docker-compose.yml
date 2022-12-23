@@ -1,10 +1,11 @@
-version: '3'
+version: '3.1'
 
 services:
 
     nginx:
       build: requirements/nginx
-      image: nginx
+      image: inception/nginx
+      container_name: nginx
       restart: always
       ports:
           - "443:443"
@@ -14,12 +15,11 @@ services:
 
     wordpress:
       build: requirements/wordpress
-      image: wordpress
+      image: inception/wordpress
+      container_name: wordpress
       restart: always
       volumes:
         - wordpress:/www
-      ports:
-        - "9000:9000"
 
 volumes:
   wordpress:
