@@ -6,18 +6,35 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:41 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/12/19 20:47:13 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/12/23 12:29:17 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILE:= srcs/docker-compose.yml
+NAME:= up
 
-all: up
+# Colors
+GREEN=\033[0;32m
+RED=\033[0;31m
+BLUE=\033[0;34m
+END=\033[0m
 
-up:
+all: $(NAME)
+
+$(NAME):
 	$(shell docker-compose -f $(FILE) -p "inception" up -d)
 
-down:
+clean:
 	$(shell docker-compose -f $(FILE) -p "inception" down)
 
-.PHONY: all up down
+fclean: clean
+	@echo "$(BLUE)Deleting docker images$(END)"
+	@docker rmi -f  $$(docker images -aq)
+	@echo "$(BLUE)Deleting docker volumes$(END)"
+	@docker volume prune -f
+	@echo "$(BLUE)Deleting docker networks$(END)"
+	@docker network prune -f
+
+re: fclean all
+
+.PHONY: all $(NAME) clean fclean re
