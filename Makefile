@@ -6,12 +6,14 @@
 #    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:41 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/12/23 12:29:17 by mmateo-t         ###   ########.fr        #
+#    Updated: 2022/12/26 12:15:51 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILE:= srcs/docker-compose.yml
 NAME:= up
+DOMAIN:= mmateo.42.es
+BIRDS:= birds.com
 
 # Colors
 GREEN=\033[0;32m
@@ -23,6 +25,10 @@ all: $(NAME)
 
 $(NAME):
 	$(shell docker-compose -f $(FILE) -p "inception" up -d)
+
+host:
+	$(shell echo "$(DOMAIN) 127.0.0.1" >> /etc/hosts)
+	$(shell echo "$(BIRDS) 127.0.0.1" >> /etc/hosts)
 
 clean:
 	$(shell docker-compose -f $(FILE) -p "inception" down)
@@ -37,4 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all $(NAME) clean fclean re
+.PHONY: all $(NAME) clean fclean re host
