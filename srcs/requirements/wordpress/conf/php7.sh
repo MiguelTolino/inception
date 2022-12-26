@@ -11,7 +11,9 @@ PHP_DISPLAY_ERRORS="On"
 PHP_DISPLAY_STARTUP_ERRORS="On"
 PHP_ERROR_REPORTING="E_COMPILE_ERROR\|E_RECOVERABLE_ERROR\|E_ERROR\|E_CORE_ERROR"
 PHP_CGI_FIX_PATHINFO=0
+PHP_PORT=9000
 
+sed -i "s/127.0.0.1:${PHP_PORT}/${PHP_PORT}/g" /etc/php7/php-fpm.d/www.conf
 sed -i "s|;listen.owner\s*=\s*nobody|listen.owner = ${PHP_FPM_USER}|g" /etc/php7/php-fpm.d/www.conf
 sed -i "s|;listen.group\s*=\s*nobody|listen.group = ${PHP_FPM_GROUP}|g" /etc/php7/php-fpm.d/www.conf
 sed -i "s|;listen.mode\s*=\s*0660|listen.mode = ${PHP_FPM_LISTEN_MODE}|g" /etc/php7/php-fpm.d/www.conf
