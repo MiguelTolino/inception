@@ -20,7 +20,18 @@ services:
       restart: always
       volumes:
         - wordpress:/www
+      depends_on:
+        - mariadb
+
+    mariadb:
+      build: requirements/mariadb
+      image: inception/mariadb
+      container_name: mariadb
+      restart: always
+      volumes:
+        - db:/var/lib/mysql
 
 volumes:
   wordpress:
+  db:
 
