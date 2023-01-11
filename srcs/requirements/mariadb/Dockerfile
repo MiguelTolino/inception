@@ -10,5 +10,5 @@ RUN	apk update && apk upgrade && \
 	/etc/init.d/mariadb setup && \
 	rc-update add mariadb default
 
-CMD /usr/bin/mariadbd -u mysql
+CMD tail -f
 
