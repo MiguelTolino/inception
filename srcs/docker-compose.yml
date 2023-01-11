@@ -18,8 +18,8 @@ services:
       image: inception/wordpress
       container_name: wordpress
       restart: always
-      volumes:
-        - "/home/${LOGIN}/data:/www"
+  #    volumes:
+  #      - "/home/${LOGIN}/data/wordpress:/www"
       depends_on:
         - mariadb
       environment:
@@ -32,5 +32,5 @@ services:
       image: inception/mariadb
       container_name: mariadb
       restart: always
-      volumes:
-        - "/home/${LOGIN}/data:/var/lib/mysql"
+   #   volumes:
+    #    - "/home/${LOGIN}/data/mysql:/var/lib/mysql"

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    vm-script.sh                                       :+:      :+:    :+:    #
+#    vm-dependencies.sh                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:32 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/11/15 19:30:08 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/01/11 22:16:41 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,5 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
-docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
