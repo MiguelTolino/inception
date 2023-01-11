@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2'
 
 services:
 
@@ -19,7 +19,7 @@ services:
       container_name: wordpress
       restart: always
       volumes:
-        - wordpress:/www
+        - "/home/${LOGIN}/data:/www"
       depends_on:
         - mariadb
       environment:
@@ -33,9 +33,4 @@ services:
       container_name: mariadb
       restart: always
       volumes:
-        - db:/var/lib/mysql
-
-volumes:
-  wordpress:
-  db:
-
+        - "/home/${LOGIN}/data:/var/lib/mysql"
