@@ -29,6 +29,7 @@ $(NAME):
 host:
 	$(shell echo "$(DOMAIN) 127.0.0.1" >> /etc/hosts)
 	$(shell echo "$(BIRDS) 127.0.0.1" >> /etc/hosts)
+	@echo "$(GREEN)Domains added to hosts$(END)"
 
 clean:
 	$(shell docker-compose -f $(FILE) -p "inception" down)
