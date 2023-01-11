@@ -57,4 +57,9 @@ RUN	sh -c conf/php7.sh && \
 	echo "<?php phpinfo(); ?>" > /www/index.php && \
 	chown -R www:www /www
 
+RUN mv /www/wordpress/wp-config-sample.php /www/wordpress/wp-config.php && \
+	sed -i "s/database_name_here/${WP_DATABASE}/g" /www/wordpress/wp-config.php && \
+	sed -i "s/username_here/${WP_USER}/g" /www/wordpress/wp-config.php && \
+	sed -i "s/password_here/${WP_PASSWORD}/g" /www/wordpress/wp-config.php
+
 CMD php-fpm7 -F
