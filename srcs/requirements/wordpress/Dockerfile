@@ -54,7 +54,6 @@ RUN	mkdir -p /var/www && \
 	wget http://wordpress.org/latest.tar.gz && \
 	tar -xzvf latest.tar.gz && \
 	rm latest.tar.gz && \
-	echo "<?php phpinfo(); ?>" > /var/www/index.php && \
 	chown -R www:www /var/www && \
 	sh -c /root/conf/php7.sh && \
 	mv /root/conf/wp-config.php /var/www/wordpress
