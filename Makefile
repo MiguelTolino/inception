@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:41 by mmateo-t          #+#    #+#              #
-#    Updated: 2023/01/11 22:05:25 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/01/18 19:38:25 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,15 @@ END=\033[0m
 all: $(NAME)
 
 $(NAME):
-	$(shell docker compose -f $(FILE) -p "inception" up -d)
+	@ docker-compose -f $(FILE) -p "inception" up -d
 
 host:
-	$(shell echo "$(DOMAIN) 127.0.0.1" >> /etc/hosts)
-	$(shell echo "$(BIRDS) 127.0.0.1" >> /etc/hosts)
-	@echo "$(GREEN)Domains added to hosts$(END)"
+	@ echo "$(DOMAIN) 127.0.0.1" >> /etc/hosts
+	@ echo "$(BIRDS) 127.0.0.1" >> /etc/hosts
+	@ echo "$(GREEN)Domains added to hosts$(END)"
 
 clean:
-	$(shell docker compose -f $(FILE) -p "inception" down)
+	@ docker-compose -f $(FILE) -p "inception" down
 
 fclean: clean
 	@echo "$(BLUE)Deleting docker images$(END)"
@@ -41,6 +41,9 @@ fclean: clean
 	@docker volume prune -f
 	@echo "$(BLUE)Deleting docker networks$(END)"
 	@docker network prune -f
+
+reload: 
+	@ docker-compose -f $(FILE) up --build
 
 re: fclean all
 
