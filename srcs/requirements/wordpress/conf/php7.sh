@@ -13,6 +13,8 @@ PHP_ERROR_REPORTING="E_COMPILE_ERROR\|E_RECOVERABLE_ERROR\|E_ERROR\|E_CORE_ERROR
 PHP_CGI_FIX_PATHINFO=0
 PHP_PORT=9000
 
+mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
+
 sed -i "s/127.0.0.1:${PHP_PORT}/${PHP_PORT}/g" /etc/php7/php-fpm.d/www.conf
 sed -i "s|;listen.owner\s*=\s*nobody|listen.owner = ${PHP_FPM_USER}|g" /etc/php7/php-fpm.d/www.conf
 sed -i "s|;listen.group\s*=\s*nobody|listen.group = ${PHP_FPM_GROUP}|g" /etc/php7/php-fpm.d/www.conf

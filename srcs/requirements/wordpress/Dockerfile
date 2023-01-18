@@ -1,4 +1,5 @@
 ARG version=3.15
+
 FROM alpine:${version}
 WORKDIR /root
 EXPOSE 9000
@@ -47,19 +48,15 @@ RUN	openrc && \
 	touch /run/openrc/softlevel && \
 	rc-update add php-fpm7 default
 
-RUN	sh -c conf/php7.sh && \
-	mkdir -p /www && \
+RUN	mkdir -p /var/www && \
 	adduser -D -g 'www' www && \
-	cd /www && \
+	cd /var/www && \
 	wget http://wordpress.org/latest.tar.gz && \
 	tar -xzvf latest.tar.gz && \
 	rm latest.tar.gz && \
-	echo "<?php phpinfo(); ?>" > /www/index.php && \
-	chown -R www:www /www
-
-RUN mv /www/wordpress/wp-config-sample.php /www/wordpress/wp-config.php && \
-	sed -i "s/database_name_here/${WP_DATABASE}/g" /www/wordpress/wp-config.php && \
-	sed -i "s/username_here/${WP_USER}/g" /www/wordpress/wp-config.php && \
-	sed -i "s/password_here/${WP_PASSWORD}/g" /www/wordpress/wp-config.php
+	echo "<?php phpinfo(); ?>" > /var/www/index.php && \
+	chown -R www:www /var/www && \
+	sh -c /root/conf/php7.sh && \
+	mv /root/conf/wp-config.php /var/www/wordpress
 
 CMD php-fpm7 -F
