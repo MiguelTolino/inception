@@ -14,6 +14,7 @@ services:
           - wordpress
 
     wordpress:
+      env_file: .env
       build: requirements/wordpress
       image: inception/wordpress
       container_name: wordpress
@@ -22,13 +23,14 @@ services:
   #      - "/home/${LOGIN}/data/wordpress:/www"
   #    depends_on:
   #      - mariadb
-      env_file:
-        - .env
 
 #    mariadb:
+      #env_file: .env
 #      build: requirements/mariadb
 #      image: inception/mariadb
 #      container_name: mariadb
 #      restart: always
 #   #   volumes:
     #    - "/home/${LOGIN}/data/mysql:/var/lib/mysql"
+    #  depends_on:
+    #      - wordpress
