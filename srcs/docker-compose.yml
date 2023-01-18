@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
 
@@ -20,17 +20,15 @@ services:
       restart: always
   #    volumes:
   #      - "/home/${LOGIN}/data/wordpress:/www"
-      depends_on:
-        - mariadb
-      environment:
-        WP_DATABASE: ${WP_DATABASE}
-        WP_USER: ${WP_USER}
-        WP_PASSWORD: ${WP_PASSWORD}
+  #    depends_on:
+  #      - mariadb
+      env_file:
+        - .env
 
-    mariadb:
-      build: requirements/mariadb
-      image: inception/mariadb
-      container_name: mariadb
-      restart: always
-   #   volumes:
+#    mariadb:
+#      build: requirements/mariadb
+#      image: inception/mariadb
+#      container_name: mariadb
+#      restart: always
+#   #   volumes:
     #    - "/home/${LOGIN}/data/mysql:/var/lib/mysql"
