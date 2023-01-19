@@ -3,12 +3,13 @@ FROM alpine:${version}
 WORKDIR /root
 EXPOSE 3306
 COPY . .
-RUN	apk update && apk upgrade && \
+RUN	apk update && \
 	apk add --no-cache mariadb openrc mariadb-client && \ 
 	openrc && \
 	touch /run/openrc/softlevel && \
 	/etc/init.d/mariadb setup && \
-	rc-update add mariadb default
+	rc-update add mariadb default && \
+	sh conf/mariadb_script.sh
 
-CMD tail -f
+CMD /usr/bin/mysqld_safe --datadir='/var/lib/mysql'
 
