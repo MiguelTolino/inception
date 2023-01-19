@@ -6,13 +6,13 @@
 #    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:41 by mmateo-t          #+#    #+#              #
-#    Updated: 2023/01/18 19:38:25 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/01/19 23:08:07 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILE:= srcs/docker-compose.yml
 NAME:= up
-DOMAIN:= mmateo.42.es
+DOMAIN:= mmateo.42.fr
 BIRDS:= birds.com
 
 # Colors

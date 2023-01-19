@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    nginx_conf.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmateo-t <mmateo-t@student.42madrid>       +#+  +:+       +#+         #
+#    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 13:04:47 by mmateo-t          #+#    #+#              #
-#    Updated: 2022/12/23 19:28:13 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/01/19 23:08:07 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DOMAIN=mmateo.42.es
+DOMAIN=mmateo.42.fr
 BIRDS_DOMAIN=birds.com
 LOCATION='/www'
 USER='www'
@@ -39,6 +39,6 @@ rc-update add nginx default
 mkdir /etc/nginx/certificate
 cd /etc/nginx/certificate
 openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyout nginx.key \
--subj "/C=ES/ST=Madrid/L=Madrid/O=42Madrid/OU=42Madrid/CN=mmateo.42.es"
+-subj "/C=ES/ST=Madrid/L=Madrid/O=42Madrid/OU=42Madrid/CN=mmateo.42.fr"
 openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate2.crt -keyout nginx2.key \
--subj "/C=ES/ST=Madrid/L=Madrid/O=42Madrid/OU=42Madrid/CN=mmateo.42.es"
+-subj "/C=ES/ST=Madrid/L=Madrid/O=42Madrid/OU=42Madrid/CN=mmateo.42.fr"

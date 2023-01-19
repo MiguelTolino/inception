@@ -55,7 +55,8 @@ RUN	mkdir -p /var/www && \
 	tar -xzvf latest.tar.gz && \
 	rm latest.tar.gz && \
 	chown -R www:www /var/www && \
-	sh -c /root/conf/php7.sh && \
-	mv /root/conf/wp-config.php /var/www/wordpress
+	echo "<?php phpinfo(); ?>" > /var/www/index.php && \
+	mv /root/conf/wp-config.php /var/www/wordpress && \
+	sed -i "s/127.0.0.1:9000/9000/g" /etc/php7/php-fpm.d/www.conf
 
 CMD php-fpm7 -F
