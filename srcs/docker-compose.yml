@@ -26,7 +26,7 @@ services:
       networks:
         - inception
   #    volumes:
-  #      - "/home/${LOGIN}/data/wordpress:/www"
+  #      - "/home/mmateo-t/data/wordpress:/var/www/wordpress"
 
     mariadb:
       build: requirements/mariadb
@@ -37,7 +37,7 @@ services:
       networks:
         - inception
    #   volumes:
-    #    - "/home/${LOGIN}/data/mysql:/var/lib/mysql"
+    #    - "/home/mmateo-t/data/mysql:/var/lib/mysql"
 
 networks:
   inception:

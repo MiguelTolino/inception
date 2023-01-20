@@ -12,15 +12,15 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 	cat << EOF > "tmp.sql"
 USE mysql;
 FLUSH PRIVILEGES;
-GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION ;
-GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION ;
 FLUSH PRIVILEGES ;
 DROP DATABASE IF EXISTS test ;
 DELETE FROM mysql.user WHERE User='';
 FLUSH PRIVILEGES;
-CREATE DATABASE IF NOT EXISTS wordpress CHARACTER SET utf8 COLLATE utf8_general_ci ;
-GRANT ALL ON wordpress.* TO 'wpuser'@'%' IDENTIFIED BY 'password' ;
-GRANT ALL ON wordpress.* TO 'wpuser'@'localhost' IDENTIFIED BY 'password' ;
+CREATE DATABASE IF NOT EXISTS $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci ;
+GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' ;
+GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD' ;
 FLUSH PRIVILEGES ;
 EOF
 	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < tmp.sql

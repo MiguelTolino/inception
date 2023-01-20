@@ -7,6 +7,8 @@ COPY . .
 
 RUN apk update && apk upgrade && \
 	apk add php7-fpm \
+	php7 \
+	php7-phar \
 	php7-soap \
 	php7-openssl \
 	php7-gmp \
@@ -48,15 +50,10 @@ RUN	openrc && \
 	touch /run/openrc/softlevel && \
 	rc-update add php-fpm7 default
 
-RUN	mkdir -p /var/www && \
-	adduser -D -g 'www' www && \
-	cd /var/www && \
-	wget http://wordpress.org/latest.tar.gz && \
-	tar -xzvf latest.tar.gz && \
-	rm latest.tar.gz && \
-	chown -R www:www /var/www && \
-	echo "<?php phpinfo(); ?>" > /var/www/index.php && \
-	mv /root/conf/wp-config.php /var/www/wordpress && \
+RUN	adduser -D -g 'www' www && \
+	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp && \
 	sed -i "s/127.0.0.1:9000/9000/g" /etc/php7/php-fpm.d/www.conf
 
-CMD php-fpm7 -F
+CMD ["tools/wp-script.sh"]
