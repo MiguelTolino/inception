@@ -8,7 +8,6 @@ wget http://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 rm latest.tar.gz
 chown -R www:www /var/www
-mv /root/conf/wp-config.php /var/www/wordpress
 fi
 
 cp /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
@@ -26,5 +25,11 @@ sed -i 's/'"'AUTH_SALT',".*"'put your unique phrase here'"'/'"'AUTH_SALT', '""$(
 sed -i 's/'"'SECURE_AUTH_SALT',".*"'put your unique phrase here'"'/'"'SECURE_AUTH_SALT', '""$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)""'"'/g' /var/www/wordpress/wp-config.php;
 sed -i 's/'"'LOGGED_IN_SALT',".*"'put your unique phrase here'"'/'"'LOGGED_IN_SALT', '""$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)""'"'/g' /var/www/wordpress/wp-config.php;
 sed -i 's/'"'NONCE_SALT',".*"'put your unique phrase here'"'/'"'NONCE_SALT', '""$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)""'"'/g' /var/www/wordpress/wp-config.php;
+
+wp core install --url=$DOMAIN_NAME/wordpress --title=$WP_TITLE --admin_user=$WP_ADMIN_USR --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
+wp core install --url=$DOMAIN_NAME --title="Inception" --admin_user=$DB_USER --admin_password=$DB_PASSWORD \
+--admin_email=$WP_EMAIL --skip-email --allow-root --path=/var/www/wordpress
+wp user create $LOGIN $EMAIL --role=author --user_pass=$DB_PASSWORD --allow-root --path=/var/www/wordpress
+wp theme install inspiro --activate --allow-root --path=/var/www/wordpress
 
 exec php-fpm7 -F
