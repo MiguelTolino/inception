@@ -56,4 +56,4 @@ RUN	adduser -D -g 'www' www && \
 	mv wp-cli.phar /usr/local/bin/wp && \
 	sed -i "s/127.0.0.1:9000/9000/g" /etc/php7/php-fpm.d/www.conf
 
-CMD ["tools/wp-script.sh"]
+CMD sh tools/wp-script.sh

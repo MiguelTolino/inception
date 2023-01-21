@@ -6,13 +6,11 @@
 #    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 13:04:47 by mmateo-t          #+#    #+#              #
-#    Updated: 2023/01/19 23:08:07 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/01/21 00:18:22 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DOMAIN=mmateo.42.fr
-BIRDS_DOMAIN=birds.com
-LOCATION='/www'
 USER='www'
 
 # Install dependencies
@@ -21,14 +19,11 @@ apk update && apk upgrade && apk add --no-cache openrc nginx openssl
 # Set a new nginx configuration
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 cp conf/nginx.conf /etc/nginx/nginx.conf
-cp -rf conf/www $LOCATION
 mkdir -p /var/run/nginx
-
 
 # Create user and group
 adduser -D -g $USER $USER
 chown -R $USER:$USER /var/lib/nginx
-chown -R $USER:$USER $LOCATION
 
 # Configurate nginx as default
 openrc
