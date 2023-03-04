@@ -25,8 +25,8 @@ services:
         - mariadb
       networks:
         - inception
-  #    volumes:
-  #      - "/home/mmateo-t/data/wordpress:/var/www/wordpress"
+      volumes:
+        - "/home/mmateo/data/wordpress:/var/www/wordpress"
 
     mariadb:
       build: requirements/mariadb
@@ -36,8 +36,8 @@ services:
       env_file: .env
       networks:
         - inception
-   #   volumes:
-    #    - "/home/mmateo-t/data/mysql:/var/lib/mysql"
+      volumes:
+        - "/home/mmateo/data/mysql:/var/lib/mysql"
 
 networks:
   inception:

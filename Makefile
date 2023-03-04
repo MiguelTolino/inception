@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:59:41 by mmateo-t          #+#    #+#              #
-#    Updated: 2023/01/19 23:08:07 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/03/04 20:35:49 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ $(NAME):
 	@ docker-compose -f $(FILE) -p "inception" up -d
 
 host:
-	@ echo "$(DOMAIN) 127.0.0.1" >> /etc/hosts
-	@ echo "$(BIRDS) 127.0.0.1" >> /etc/hosts
+	@ echo "127.0.0.1	$(DOMAIN)" >> /etc/hosts
 	@ echo "$(GREEN)Domains added to hosts$(END)"
 
 clean:
