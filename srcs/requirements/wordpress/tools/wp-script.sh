@@ -6,7 +6,6 @@ cd /var/www
 wget http://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 rm latest.tar.gz
-chown -R www:www /var/www
 
 cp /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
 

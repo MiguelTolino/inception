@@ -54,6 +54,9 @@ RUN	adduser -D -g 'www' www && \
 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp && \
-	sed -i "s/127.0.0.1:9000/9000/g" /etc/php7/php-fpm.d/www.conf
+	sed -i "s/127.0.0.1:9000/9000/g" /etc/php7/php-fpm.d/www.conf && \
+	sed -i "s/nobody/www/g" /etc/php7/php-fpm.d/www.conf && \
+	sed -i "s/;listen.owner/listen.owner/g" /etc/php7/php-fpm.d/www.conf && \
+	sed -i "s/;listen.group/listen.group/g" /etc/php7/php-fpm.d/www.conf
 
 CMD sh tools/wp-script.sh
