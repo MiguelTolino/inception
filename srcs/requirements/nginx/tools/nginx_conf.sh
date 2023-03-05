@@ -6,7 +6,7 @@
 #    By: mmateo-t <mmateo-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 13:04:47 by mmateo-t          #+#    #+#              #
-#    Updated: 2023/01/21 00:18:22 by mmateo-t         ###   ########.fr        #
+#    Updated: 2023/03/05 13:05:39 by mmateo-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ USER='www'
 apk update && apk upgrade && apk add --no-cache openrc nginx openssl
 
 # Set a new nginx configuration
-mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-cp conf/nginx.conf /etc/nginx/nginx.conf
+mv conf/default.conf /etc/nginx/http.d
 mkdir -p /var/run/nginx
 
 # Create user and group
