@@ -28,7 +28,7 @@ services:
       networks:
         - inception
       volumes:
-        - "/home/mmateo/data/wordpress:/var/www/wordpress"
+        - wp_vol:/var/www/wordpress
 
     mariadb:
       build: requirements/mariadb
@@ -39,8 +39,22 @@ services:
       networks:
         - inception
       volumes:
-        - "/home/mmateo/data/mysql:/var/lib/mysql"
+        - db_vol:/var/lib/mysql
 
 networks:
   inception:
     name: inception_network
+
+volumes:
+  db_vol: 
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mmateo/data/mysql
+      o: bind
+  wp_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mmateo/data/wordpress
+      o: bind
