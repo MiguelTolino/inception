@@ -15,7 +15,7 @@ services:
       networks:
         - inception
       volumes:
-        - "/home/mmateo/data/wordpress:/var/www/wordpress"
+        - wp_vol:/var/www/wordpress
 
     wordpress:
       env_file: .env
