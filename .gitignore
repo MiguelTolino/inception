@@ -1,3 +1,4 @@
 **/.vscode
 **/.DS_Store
 srcs/vm-dependencies.sh
+**/.env
