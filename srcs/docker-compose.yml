@@ -46,15 +46,7 @@ networks:
     name: inception_network
 
 volumes:
-  db_vol: 
+  db_vol:
     driver: local
-    driver_opts:
-      type: none
-      device: /home/mmateo/data/mysql
-      o: bind
   wp_vol:
     driver: local
-    driver_opts:
-      type: none
-      device: /home/mmateo/data/wordpress
-      o: bind
