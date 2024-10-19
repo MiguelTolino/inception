@@ -10,8 +10,10 @@ services:
       ports:
           - "443:443"
           - "80:80"
+          - "8080:8080"
       depends_on:
           - wordpress
+          - phpmyadmin
       networks:
         - inception
       volumes:
@@ -40,6 +42,18 @@ services:
         - inception
       volumes:
         - db_vol:/var/lib/mysql
+      
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      depends_on:
+        - mariadb
+      container_name: phpmyadmin
+      restart: always
+      environment:
+        PMA_HOST: mariadb
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      networks:
+        - inception
 
 networks:
   inception:
