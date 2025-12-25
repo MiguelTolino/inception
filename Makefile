@@ -24,14 +24,14 @@ END=\033[0m
 all: $(NAME)
 
 $(NAME):
-	@ docker-compose -f $(FILE) -p "inception" up -d
+	@ docker compose -f $(FILE) -p "inception" up -d
 
 host:
 	@ echo "127.0.0.1	$(DOMAIN)" >> /etc/hosts
 	@ echo "$(GREEN)Domains added to hosts$(END)"
 
 clean:
-	@ docker-compose -f $(FILE) -p "inception" down
+	@ docker compose -f $(FILE) -p "inception" down
 
 fclean: clean
 	@echo "$(BLUE)Deleting docker images$(END)"
@@ -42,7 +42,7 @@ fclean: clean
 	@docker network prune -f
 
 reload: 
-	@ docker-compose -f $(FILE) up --build
+	@ docker compose -f $(FILE) up --build
 
 re: fclean all
 
