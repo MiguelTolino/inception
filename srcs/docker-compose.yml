@@ -17,7 +17,7 @@ services:
       networks:
         - inception
       volumes:
-        - wp_vol:/var/www/wordpress
+        - ${DATA_PATH}/wordpress:/var/www/wordpress
 
     wordpress:
       env_file: .env
@@ -30,7 +30,7 @@ services:
       networks:
         - inception
       volumes:
-        - wp_vol:/var/www/wordpress
+        - ${DATA_PATH}/wordpress:/var/www/wordpress
 
     mariadb:
       build: requirements/mariadb
@@ -41,7 +41,8 @@ services:
       networks:
         - inception
       volumes:
-        - db_vol:/var/lib/mysql
+        - ${DATA_PATH}/mariadb:/var/lib/mysql
+
       
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
@@ -59,8 +60,5 @@ networks:
   inception:
     driver: bridge
 
-volumes:
-  db_vol:
-    driver: local
-  wp_vol:
-    driver: local
+
+
