@@ -47,4 +47,13 @@ chmod 644 /var/www/wordpress/wp-content/mu-plugins/disable-ssl-verify.php
 chown www:www /var/www/wordpress/wp-content/mu-plugins/disable-ssl-verify.php
 fi
 
+# Add dynamic URL to wp-config.php if not already present, or update it
+# This ensures CORS issues are fixed even if using IP instead of domain
+if grep -q "WP_HOME" /var/www/wordpress/wp-config.php; then
+	sed -i "s|define('WP_HOME'.*|define('WP_HOME', 'https://' . \$_SERVER['HTTP_HOST']);|g" /var/www/wordpress/wp-config.php
+	sed -i "s|define('WP_SITEURL'.*|define('WP_SITEURL', 'https://' . \$_SERVER['HTTP_HOST']);|g" /var/www/wordpress/wp-config.php
+else
+	sed -i "/<?php/a define('WP_HOME', 'https://' . \$_SERVER['HTTP_HOST']);\ndefine('WP_SITEURL', 'https://' . \$_SERVER['HTTP_HOST']);" /var/www/wordpress/wp-config.php
+fi
+
 exec php-fpm7 -F
