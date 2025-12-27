@@ -28,6 +28,13 @@ mkdir -p /var/run/nginx
 adduser -D -g $USER $USER
 chown -R $USER:$USER /var/lib/nginx
 
+# Configure nginx.conf to use the correct user
+sed -i "s/user nginx;/user $USER;/g" /etc/nginx/nginx.conf
+# Some versions don't have the user directive, so we add it if missing
+if ! grep -q "user $USER;" /etc/nginx/nginx.conf; then
+    sed -i "1i user $USER;" /etc/nginx/nginx.conf
+fi
+
 # Configurate nginx as default
 openrc
 touch /run/openrc/softlevel
